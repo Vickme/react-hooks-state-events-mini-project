@@ -1,19 +1,26 @@
-import React from "react";
-import CategoryFilter from "./CategoryFilter";
-import NewTaskForm from "./NewTaskForm";
-import TaskList from "./TaskList";
-
-import { CATEGORIES, TASKS } from "../data";
-console.log("Here's the data you're working with");
-console.log({ CATEGORIES, TASKS });
+import React, { useState } from "react";
+import ShoppingList from "./ShoppingList";
+import itemData from "../data/items";
 
 function App() {
+  // replace 'false' with a state variable that can be toggled between true and false
+  // this will be used for the Dark Mode Toggle feature
+
+  const [mode, modeSet] = useState("true");
+
+  function handleMode() {
+    modeSet(!mode);
+  }
+
+  const appClass = mode ? "App light" : "App dark";
+
   return (
-    <div className="App">
-      <h2>My tasks</h2>
-      <CategoryFilter />
-      <NewTaskForm />
-      <TaskList />
+    <div className={appClass}>
+      <header>
+        <h2>Shopster</h2>
+        <button onClick={(e) => handleMode()}>Dark Mode</button>
+      </header>
+      <ShoppingList items={itemData} />
     </div>
   );
 }
